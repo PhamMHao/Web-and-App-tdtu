@@ -57,6 +57,11 @@
         p {
             margin: 10px 0;
         }
+
+        .email-edit,
+        .password-edit {
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -64,12 +69,13 @@
     <form action="https://web-503073.herokuapp.com/lab01/login.php" method="POST">
         <table>
             <tr>
-                <td><label for="email">Email</label></td>
+                <td><label class="email-edit" for="email">Email</label></td>
                 <td><input type="email" id="email" name="email" required placeholder="Email@domain.com"></td>
             </tr>
             <tr>
-                <td><label for="password">Password</label></td>
-                <td><input type="password" id="password" name="password" required placeholder="Enter your password"></td>
+                <td><label class="password-edit" for="password">Password</label></td>
+                <td><input type="password" id="password" name="password" required placeholder="Enter your password">
+                </td>
             </tr>
             <tr>
                 <td><label for="remember">Remember me</label></td>
