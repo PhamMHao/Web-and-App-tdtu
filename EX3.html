@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            width: 300px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 5px 15px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="https://web-503073.herokuapp.com/lab01/register.php" method="POST">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Full Name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+
+        <label for="birthday">Birthday</label>
+        <input type="date" id="birthday" name="birthday">
+
+        <label for="birthtime">Birthtime</label>
+        <input type="time" id="birthtime" name="birthtime">
+
+        <label>Gender</label>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male" style="display: inline;">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female" style="display: inline;">Female</label>
+
+        <label for="country">From</label>
+        <select id="country" name="country">
+            <option value="">Select a country</option>
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+            <option value="canada">Canada</option>
+            <option value="australia">Australia</option>
+            <option value="india">India</option>
+        </select>
+
+        <label>Favorite IDE</label>
+        <input type="checkbox" id="vscode" name="ide" value="vscode">
+        <label for="vscode" style="display: inline;">Visual Studio Code</label><br>
+        <input type="checkbox" id="sublime" name="ide" value="sublime">
+        <label for="sublime" style="display: inline;">Sublime Text</label><br>
+        <input type="checkbox" id="eclipse" name="ide" value="eclipse">
+        <label for="eclipse" style="display: inline;">Eclipse</label><br>
+        <input type="checkbox" id="atom" name="ide" value="atom">
+        <label for="atom" style="display: inline;">Atom</label><br>
+        <input type="checkbox" id="intellij" name="ide" value="intellij">
+        <label for="intellij" style="display: inline;">IntelliJ IDEA</label><br>
+
+        <label for="toeic">TOEIC Score</label>
+        <input type="range" id="toeic" name="toeic" min="5" max="990" step="5">
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4"></textarea>
+
+        <div class="buttons">
+            <button type="submit">Register</button>
+            <button type="reset">Again</button>
+        </div>
+    </form>
+
+</body>
+
+</html>
