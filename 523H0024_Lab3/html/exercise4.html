@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <script src="../js/ex4.js" defer></script>
+</head>
+
+<body>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        select {
+            float: left;
+        }
+
+        img {
+            float: left;
+        }
+    </style>
+
+
+    <select id="imageList" name="imageList" size="10">
+        <option value="../images/pic_001.jpg">pic_001.jpg</option>
+        <option value="../images/pic_002.jpg">pic_002.jpg</option>
+        <option value="../images/pic_003.jpg">pic_003.jpg</option>
+        <option value="../images/pic_004.jpg">pic_004.jpg</option>
+        <option value="../images/pic_005.jpg">pic_005.jpg</option>
+        <option value="../images/pic_006.jpg">pic_006.jpg</option>
+        <option value="../images/pic_007.jpg">pic_007.jpg</option>
+        <option value="../images/pic_008.jpg">pic_008.jpg</option>
+        <option value="../images/pic_009.jpg">pic_009.jpg</option>
+        <option value="../images/pic_010.jpg">pic_010.jpg</option>
+    </select>
+    <img id="displayedImage" src="../images/pic_001.jpg">
+    <button type="button" id="backBtn">Back</button>
+    <button type="button" id="slideshowBtn">Start slideshow</button>
+    <button type="button" id="nextBtn">Next</button>
+    <p id="imageInfo">pic_001.jpg (1/10)</p>
+</body>
+
+</html>
