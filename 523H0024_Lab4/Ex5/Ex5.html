@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>This is a title but I don't have the content to right</title>
+    <!-- this is the content I have the free time to write
+    If you want to ask me anything, you can ask me at any time. I will answer you as soon as possible. I am very happy to
+    help you. I am a student at the University of Information Technology. I am studying in the field of software.
+    a little gift for me. This is 500k -->
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❅';
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.opacity = Math.random();
+            document.querySelector('.snow-container').appendChild(snowflake);
+
+            // Remove snowflake after animation
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        window.onload = function () {
+            // Create snow container
+            const container = document.createElement('div');
+            container.classList.add('snow-container');
+            document.body.prepend(container);
+
+            // Create snowflakes at intervals
+            setInterval(createSnowflake, 100);
+        };
+    </script>
+    <!-- end of the content I have the free time to write -->
+</head>
+
+<body>
+
+    <!-- same the ex4 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1 class="text-success">This is st</h1>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--  -->
+
+    <div class="container mt-4">
+        <div class="row">
+            <aside class="col-lg-4">
+                <div class="card grow-card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Quick Links</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-arrow-right"></i> Latest News
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-arrow-right"></i> Upcoming Events
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-arrow-right"></i> Resources
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+            <main class="col-lg-8">
+                <div class="mb-4">
+                    <div id="imageCarousel" class="carousel slide" data-ride="carousel" data-interval="1000">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#imageCarousel" data-slide-to="1"></li>
+                            <li data-target="#imageCarousel" data-slide-to="2"></li>
+                        </ol>
+
+                        <!-- Slides -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="./image-900x350-meow.jpg" class="d-block w-100" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./image-900x350 (1).jpg" class="d-block w-100" alt="Second slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./image-900x350 (2).jpg" class="d-block w-100" alt="Third slide">
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+
+                <hr class="my-4 border-secondary">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="./image-700x400 (1).jpg" class="card-img-top" alt="Card 1">
+                                <div class="card-body">
+                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam quod magnam
+                                        cupiditate voluptas id, fugit voluptatum suscipit provident amet, aut similique
+                                        sint labore
+                                        voluptate necessitatibus sapiente. Fugiat, a? Distinctio, hic?</p>
+                                    <hr class="my-3">
+                                    <button class="btn btn-secondary mt-2">View details »</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="./image-700x400 (1).jpg" class="card-img-top" alt="Card 2">
+                                <div class="card-body">
+                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam quod magnam
+                                        cupiditate voluptas id, fugit voluptatum suscipit provident amet, aut similique
+                                        sint labore
+                                        voluptate necessitatibus sapiente. Fugiat, a? Distinctio, hic?</p>
+                                    <hr class="my-3">
+                                    <button class="btn btn-secondary mt-2">View details »</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="./image-700x400 (1).jpg" class="card-img-top" alt="Card 3">
+                                <div class="card-body">
+                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam quod magnam
+                                        cupiditate voluptas id, fugit voluptatum suscipit provident amet, aut similique
+                                        sint labore
+                                        voluptate necessitatibus sapiente. Fugiat, a? Distinctio, hic?</p>
+                                    <hr class="my-3">
+                                    <button class="btn btn-secondary mt-2">View details »</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="./image-700x400 (1).jpg" class="card-img-top" alt="Card 4">
+                                <div class="card-body">
+                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam quod magnam
+                                        cupiditate voluptas id, fugit voluptatum suscipit provident amet, aut similique
+                                        sint labore
+                                        voluptate necessitatibus sapiente. Fugiat, a? Distinctio, hic?</p>
+                                    <hr class="my-3">
+                                    <button class="btn btn-secondary mt-2">View details »</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="./image-700x400 (1).jpg" class="card-img-top" alt="Card 5">
+                                <div class="card-body">
+                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam quod magnam
+                                        cupiditate voluptas id, fugit voluptatum suscipit provident amet, aut similique
+                                        sint labore
+                                        voluptate necessitatibus sapiente. Fugiat, a? Distinctio, hic?</p>
+                                    <hr class="my-3">
+                                    <button class="btn btn-secondary mt-2">View details »</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="./image-700x400 (1).jpg" class="card-img-top" alt="Card 6">
+                                <div class="card-body">
+                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam quod magnam
+                                        cupiditate voluptas id, fugit voluptatum suscipit provident amet, aut similique
+                                        sint labore
+                                        voluptate necessitatibus sapiente. Fugiat, a? Distinctio, hic?</p>
+                                    <hr class="my-3">
+                                    <button class="btn btn-secondary mt-2">View details »</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <footer class="bg-dark text-light mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <h5>About Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Our Story</a></li>
+                        <li><a href="#" class="text-light">Team</a></li>
+                        <li><a href="#" class="text-light">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Services</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Web Design</a></li>
+                        <li><a href="#" class="text-light">Development</a></li>
+                        <li><a href="#" class="text-light">Hosting</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@example.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Street, City</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Follow Us</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center py-3 border-top border-secondary">
+            <p class="mb-0">&copy;this content copy in bstr and edit by meow meow</p>
+        </div>
+    </footer>
+</body>
+
+</html>

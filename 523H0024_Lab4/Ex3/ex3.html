@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">Registration Form</h3>
+                    </div>
+                    <div class="card-body">
+                        <form class="needs-validation" novalidate>
+
+                            <!-- Name Fields Row -->
+                            <div class="row">
+                                <!-- First Name -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">First Name</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" id="firstName" placeholder="First Name"
+                                            required>
+                                        <div class="invalid-feedback">Please enter your first name</div>
+                                    </div>
+                                </div>
+
+                                <!-- Last Name -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Last Name</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" id="lastName" placeholder="Last Name"
+                                            required>
+                                        <div class="invalid-feedback">Please enter your last name</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="email">Email</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    </div>
+                                    <input type="email" class="form-control" id="email" placeholder="abc@gmail.com"
+                                        required>
+                                    <div class="invalid-feedback">Please enter a valid email</div>
+                                </div>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label for="password">Password</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" id="password"
+                                        placeholder="Enter your password" required>
+                                    <div class="invalid-feedback">Please enter a password</div>
+                                </div>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="mb-3">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" id="confirmPassword"
+                                        placeholder="Confirm your password" required>
+                                    <div class="invalid-feedback">Passwords must match</div>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="mb-3">
+                                <label for="phone">Phone Number</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input type="tel" class="form-control" id="phone" required
+                                        placeholder="Enter your phone number">
+                                    <div class="invalid-feedback">Please enter a valid phone number</div>
+                                </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="mb-3">
+                                <label for="address">Address</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"></div>
+                                    <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                    <textarea class="form-control" id="address" rows="2" required
+                                        placeholder="Enter your address"></textarea>
+                                </div>
+
+                                <div class="invalid-feedback">Please enter your address</div>
+                            </div>
+                    </div>
+
+                    <!-- Submit and Reset Buttons -->
+                    <div class="btn-group w-50 mt-3 mr-auto ml-auto">
+                        <button type="submit" class="btn btn-primary mr-2 rounded-lg">Login</button>
+                        <button type="reset" class="btn btn-secondary ml-2 rounded-lg">Reset</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        (() => {
+            'use strict';
+            const forms = document.getElementsByClassName('needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    if (form.querySelector('#password').value !== form.querySelector('#confirmPassword').value) {
+                        event.preventDefault();
+                        form.querySelector('#confirmPassword').setCustomValidity('Passwords must match');
+                    } else {
+                        form.querySelector('#confirmPassword').setCustomValidity('');
+                    }
+                    form.classList.add('was-validated');
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>
