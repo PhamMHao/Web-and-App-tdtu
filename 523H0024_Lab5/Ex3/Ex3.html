@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Grid</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            /* Changed from 5 to 10 columns */
+            gap: 5px;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        .color-cell {
+            width: 50px;
+            /* Reduced from 80px for better fit */
+            height: 50px;
+            /* Reduced from 80px for better fit */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Color Grid</h1>
+        <div id="colorGrid" class="color-grid"></div>
+    </div>
+    <div id="message" class="message"></div>
+
+    <script>
+        let selectedColor = null; // Add this variable to store the clicked color
+
+        const generateRandomColor = () => {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        };
+
+        const createColorGrid = (rows, cols) => {
+            const grid = document.getElementById('colorGrid');
+            const colors = [];
+
+            for (let i = 0; i < rows * cols; i++) {
+                const cell = document.createElement('div');
+                const color = generateRandomColor();
+                colors.push(color);
+
+                cell.className = 'color-cell';
+                cell.style.backgroundColor = color;
+
+                cell.addEventListener('mouseover', () => {
+                    cell.style.transform = 'scale(1.1)';
+                    document.body.style.backgroundColor = color;
+                    showMessage(`Previewing ${color}`);
+                });
+
+                cell.addEventListener('mouseout', () => {
+                    cell.style.transform = 'scale(1)';
+                    // Only reset to white if no color is selected
+                    document.body.style.backgroundColor = selectedColor || 'white';
+                });
+
+                // Add click event listener
+                cell.addEventListener('click', () => {
+                    selectedColor = color;
+                    document.body.style.backgroundColor = color;
+                    showMessage(`Selected ${color}`);
+                });
+
+                grid.appendChild(cell);
+            }
+        };
+
+        const showMessage = text => {
+            const message = document.getElementById('message');
+            message.textContent = text;
+            message.style.display = 'block';
+            message.style.opacity = '1';
+
+            setTimeout(() => {
+                message.style.opacity = '0';
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 300);
+            }, 2700);
+        };
+
+        // Initialize the grid with 10x10 cells
+        createColorGrid(10, 10);
+    </script>
+</body>
+
+</html>

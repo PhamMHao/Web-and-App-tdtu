@@ -1,0 +1,173 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    animation: pageLoad 0.6s ease-out;
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #2196F3;
+    padding-bottom: 10px;
+    margin: 20px 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    border-radius: 4px;
+}
+
+table, th, td {
+    border: 1px solid #e0e0e0;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #69b3f0;
+    color: rgb(66, 3, 61);
+    font-weight: 500;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
+}
+
+button:hover {
+    background-color: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+#cart-table button {
+    background-color: #f44336;
+}
+
+#cart-table button:hover {
+    background-color: #d32f2f;
+    animation: shake 0.5s ease-in-out;
+}
+
+.total-info {
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
+}
+
+.total-info p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+#total-quantity {
+    color: #2196F3;
+    font-weight: bold;
+    display: inline-block;
+    animation: pulse 0.5s ease;
+}
+
+#total-price {
+    color: #f44336;
+    font-weight: bold;
+    display: inline-block;
+    animation: pulse 0.5s ease;
+}
+
+#product-table tbody tr, #cart-table tbody tr {
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+}
+
+#cart-table tbody tr {
+    animation: slideIn 0.5s ease-out;
+}
+
+#product-table tbody tr:hover {
+    transform: translateX(5px);
+    background-color: #e3f2fd;
+}
+
+#cart-table tbody tr:hover {
+    transform: translateX(-5px);
+    background-color: #fff3f0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+}
+
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
