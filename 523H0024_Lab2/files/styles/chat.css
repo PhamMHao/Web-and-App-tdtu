@@ -51,17 +51,3 @@ body {
 .hoder:not(.me) .content {
     border-bottom-left-radius: 5px;
 }
-
-.hoder:not(.me) .content:hover {
-    background-color: #dedede;
-}
-
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-    
-    .hoder .content {
-        max-width: 85%;
-    }
-}

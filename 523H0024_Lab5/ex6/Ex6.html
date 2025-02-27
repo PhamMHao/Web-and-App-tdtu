@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            gap: 5px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+
+        .puzzle-piece {
+            width: 120px;
+            height: 120px;
+            border: 2px solid #666;
+            cursor: move;
+            transition: transform 0.3s;
+            user-select: none;
+        }
+
+        .puzzle-slot {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #999;
+            background-color: #fff;
+        }
+
+        .puzzle-slot.valid-target {
+            background-color: #e0ffe0;
+            border-style: solid;
+        }
+
+        .win-message {
+            display: none;
+            color: #2c9e2c;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            background: #e0ffe0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructions {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            max-width: 600px;
+        }
+
+        .preview-image {
+            width: 200px;
+            height: 200px;
+            margin: 10px 0;
+            border: 2px solid #666;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Puzzle Game</h1>
+    <div class="instructions">
+        <h3>How to Win:</h3>
+        <ol>
+            <li>Drag pieces from top container to correct positions in bottom container</li>
+            <li>Click pieces to rotate them to correct orientation (0 degrees)</li>
+            <li>Match each piece with its correct position and orientation</li>
+            <li>Complete image should match the preview below</li>
+        </ol>
+        <img src="img_down/preview.jpg" alt="Puzzle Preview" class="preview-image">
+    </div>
+    <div class="puzzle-container" id="pieceContainer"></div>
+    <div class="puzzle-container" id="slotContainer"></div>
+    <div id="winMessage" class="win-message">
+        Congratulations! You solved the puzzle! 🎉
+    </div>
+
+    <script>
+        const pieces = Array.from({ length: 9 }, (_, i) => `img_down/${i + 1}.jpg`);
+        const rotations = [0, 90, 180, 270];
+        let currentRotations = {};
+
+        function initializePuzzle() {
+            const pieceContainer = document.getElementById('pieceContainer');
+            const slotContainer = document.getElementById('slotContainer');
+            const shuffledPieces = [...pieces].sort(() => Math.random() - 0.5);
+
+            shuffledPieces.forEach((piece, index) => {
+                const puzzlePiece = createPuzzlePiece(piece);
+                const slot = createPuzzleSlot(piece);
+
+                pieceContainer.appendChild(puzzlePiece);
+                slotContainer.appendChild(slot);
+            });
+
+            // Add global drop handling
+            document.addEventListener('dragover', (e) => e.preventDefault());
+            document.addEventListener('drop', (e) => {
+                if (!e.target.classList.contains('puzzle-slot')) {
+                    const pieceId = e.dataTransfer.getData('text/plain');
+                    const piece = document.querySelector(`[data-piece="${pieceId}"]`);
+                    if (piece && piece.parentElement !== pieceContainer) {
+                        pieceContainer.appendChild(piece);
+                    }
+                }
+            });
+        }
+
+        function createPuzzlePiece(piece) {
+            const puzzlePiece = document.createElement('img');
+            puzzlePiece.src = piece;
+            puzzlePiece.alt = `Puzzle piece ${piece.split('/')[1]}`;
+            puzzlePiece.classList.add('puzzle-piece');
+            puzzlePiece.setAttribute('data-piece', piece);
+            puzzlePiece.draggable = true;
+
+            const rotation = rotations[Math.floor(Math.random() * rotations.length)];
+            currentRotations[piece] = rotation;
+            puzzlePiece.style.transform = `rotate(${rotation}deg)`;
+
+            puzzlePiece.addEventListener('dragstart', dragStart);
+            puzzlePiece.addEventListener('click', rotatePiece);
+
+            return puzzlePiece;
+        }
+
+        function createPuzzleSlot(piece) {
+            const slot = document.createElement('div');
+            slot.classList.add('puzzle-slot');
+            slot.setAttribute('data-slot', piece);
+
+            slot.addEventListener('dragover', dragOver);
+            slot.addEventListener('dragenter', dragEnter);
+            slot.addEventListener('dragleave', dragLeave);
+            slot.addEventListener('drop', drop);
+
+            return slot;
+        }
+
+        function dragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.getAttribute('data-piece'));
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+            if (!e.target.hasChildNodes()) {
+                e.dataTransfer.dropEffect = 'move';
+            }
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            if (e.target.hasChildNodes()) return;
+
+            const pieceId = e.dataTransfer.getData('text/plain');
+            const piece = document.querySelector(`[data-piece="${pieceId}"]`);
+
+            e.target.appendChild(piece);
+            checkWin();
+        }
+
+        function dragEnter(e) {
+            if (!e.target.hasChildNodes()) {
+                e.target.classList.add('valid-target');
+            }
+        }
+
+        function dragLeave(e) {
+            e.target.classList.remove('valid-target');
+        }
+
+        function rotatePiece(e) {
+            const piece = e.target;
+            const pieceId = piece.getAttribute('data-piece');
+            currentRotations[pieceId] = (currentRotations[pieceId] + 90) % 360;
+            piece.style.transform = `rotate(${currentRotations[pieceId]}deg)`;
+            checkWin();
+        }
+
+        function checkWin() {
+            const slots = document.querySelectorAll('.puzzle-slot');
+            let isWin = true;
+
+            slots.forEach(slot => {
+                if (!slot.hasChildNodes()) {
+                    isWin = false;
+                    return;
+                }
+
+                const piece = slot.children[0];
+                const pieceId = piece.getAttribute('data-piece');
+                const correctSlotId = slot.getAttribute('data-slot');
+
+                // Add debug console log to help see winning conditions
+                console.log(`Piece ${pieceId} at ${correctSlotId}, rotation: ${currentRotations[pieceId]}`);
+
+                if (pieceId !== correctSlotId || currentRotations[pieceId] !== 0) {
+                    isWin = false;
+                }
+            });
+
+            document.getElementById('winMessage').style.display = isWin ? 'block' : 'none';
+        }
+
+        window.onload = initializePuzzle;
+    </script>
+</body>
+
+</html>

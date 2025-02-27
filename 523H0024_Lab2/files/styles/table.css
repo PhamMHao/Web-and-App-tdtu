@@ -1,16 +1,14 @@
-/* Gới ý màu
-   + tiêu đề: #388e3c
-   + Viền bảng: #b00c2d
-   + Dòng header: #5f52ab
-   + Lunch và lab: #ffefb3
-   + Empty: #e0e0e0
-*/
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 h3 {
@@ -50,14 +48,6 @@ td {
     font-weight: bold;
 }
 
-td[colspan="2"] {
-    background-color: #ffefb3;
-}
-
-td[rowspan="2"] {
-    background-color: #ffefb3; 
-}
-
 td:empty {
     background-color: #e0e0e0; 
 }
@@ -69,31 +59,28 @@ td[colspan="2"]:empty {
 td[colspan="2"]:not(:empty) {
     background-color: #ffefb3;
 }
-
-td.lunch-edit {
+tr:nth-child(1) td:nth-child(4) {
     background-color: #ffefb3;
-    color: black !important;
 }
 
-.lunch-edit{
-    color: #ffefb3 !important;
-}
 
 
 .color-title td:hover {
-    background-color: #21146c;
+    background-color: #00f7ff;
 }
 
+
+ 
 td[colspan="2"]:not(:empty):hover,
-td.lunch-edit:hover {
-    background-color: #ffc800;
+tr:nth-child(1) td:nth-child(4):hover {
+    background-color: #ffc800 !important;
 }
 
 td:empty:hover,
 td[colspan="2"]:empty:hover {
     background-color: #878787; 
 }
-tr:not(.color-title) td:first-child:hover {
+tr:not(.color-title, td:nth-child(1)) td:first-child:hover {
     background-color: #21146c;
     color: white;
     cursor: pointer;
