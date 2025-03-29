@@ -1,3 +1,40 @@
+<?php
+
+$commentsFile = 'comments.txt';
+
+// Set timezone to Vietnam
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['name'], $_POST['comment'], $_POST['type'])) {
+        $name = htmlspecialchars($_POST['name']);
+        $comment = htmlspecialchars($_POST['comment']);
+        $type = htmlspecialchars($_POST['type']);
+        $timestamp = date('H:i - d/m/Y');
+
+        $newComment = json_encode(['name' => $name, 'comment' => $comment, 'type' => $type, 'timestamp' => $timestamp]) . PHP_EOL;
+        file_put_contents($commentsFile, $newComment, FILE_APPEND);
+    }
+}
+
+// Handle comment deletion
+if (isset($_GET['delete'])) {
+    $deleteIndex = (int)$_GET['delete'];
+    $comments = file($commentsFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if (isset($comments[$deleteIndex])) {
+        unset($comments[$deleteIndex]);
+        file_put_contents($commentsFile, implode(PHP_EOL, $comments) . PHP_EOL);
+    }
+    // after deleting comments, redirect to the same page to prevent form resubmission
+    header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
+    exit;
+}
+
+
+$comments = file_exists($commentsFile) ? file($commentsFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) : [];
+// $comments = array_reverse($comments); // Display latest comments first
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,7 +55,7 @@
             <div class="col-md-6 col-sm-8 my-3 mx-auto p-3">
                 <div class="border rounded p-3">
                     <h4 class="text-center mb-3">Nhập bình luận của bạn</h4>
-                    <form>
+                    <form method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="name">Họ và tên</label>
@@ -39,25 +76,18 @@
                             <label for="comment">Bình luận</label>
                             <textarea id="comment" name="comment" class="form-control" placeholder="Nhập nội dung" style="height: 80px"></textarea>
                         </div>
-                        <button class="btn btn-primary">Gửi bình luận</button>
+                        <button type="submit" class="btn btn-primary">Gửi bình luận</button>
                     </form>
                 </div>
                 <div class="mt-3" style="max-height: 300px; overflow: scroll">
-                    <div class="alert alert-info alert-dismissible">
-                        <button type="button" class="close" >&times;</button>
-                        <strong>Duy:</strong> Tôi thấy học web nói chung cũng nhàn.
-                        <div class="text-right small">10:30 - 10/11/2021</div>
-                    </div>
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" >&times;</button>
-                        <strong>Khoa!</strong> Đằng sau 1 lập trình viên thành công chính là một người bạn gái… không tồn tại..
-                        <div class="text-right small">10:30 - 10/11/2021</div>
-                    </div>
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" >&times;</button>
-                        <strong>Thủy!</strong> Khi bạn chết, bạn không nhận thức được điều đó mà chỉ có những người xung quanh bạn biết. Khi bạn code dở cũng vậy.
-                        <div class="text-right small">10:30 - 10/11/2021</div>
-                    </div>
+                    <?php foreach ($comments as $index => $commentData): ?>
+                        <?php $comment = json_decode($commentData, true); ?>
+                        <div class="alert <?= $comment['type'] ?> alert-dismissible">
+                            <a href="?delete=<?= $index ?>" class="close">&times;</a>
+                            <strong><?= $comment['name'] ?>:</strong> <?= $comment['comment'] ?>
+                            <div class="text-right small"><?= $comment['timestamp'] ?></div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>

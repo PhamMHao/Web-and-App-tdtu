@@ -13,24 +13,12 @@ if (!tbody || !btnAdd || !form || !nameField || !ageField || !stateField || !err
     console.error('Required DOM elements not found');
 }
 
-// Make functions globally accessible
-window.changeState = (id, currentState) => changeState(id, currentState);
-window.editStudent = (id) => editStudent(id);
-window.deleteStudent = (id) => deleteStudent(id);
-window.resetForm = () => resetForm();
-
-// Load students when page loads
-loadStudents();
-
-const loadStudents = async () => {
-    try {
-        const response = await fetch(API_URL);
-        const students = await response.json();
-        students.sort((a, b) => parseInt(a.id) - parseInt(b.id));
-        displayStudents(students);
-    } catch (error) {
-        showError('Error loading students: ' + error.message);
-    }
+const showError = (message) => {
+    errorDiv.style.display = 'block';
+    errorDiv.textContent = message;
+    setTimeout(() => {
+        errorDiv.style.display = 'none';
+    }, 3000);
 };
 
 const displayStudents = (students) => {
@@ -41,12 +29,23 @@ const displayStudents = (students) => {
         <td>${student.age}</td>
         <td><span class="badge badge-${student.state === 'pending' ? 'warning' : 'success'}">${student.state || 'pending'}</span></td>
         <td>
-            <button onclick="changeState('${student.id}', '${student.state || 'pending'}')" class="btn btn-sm btn-outline-primary">Change</button>
-            <button onclick="editStudent('${student.id}')" class="btn btn-sm btn-outline-warning">Edit</button>
+            <button onclick="changeState('${student.id}', '${student.state || 'pending'}')" class="btn btn-sm btn-outline-primary mt-1">Change</button>
+            <button onclick="editStudent('${student.id}')" class="btn btn-sm btn-outline-warning ">Edit</button>
             <button onclick="deleteStudent('${student.id}')" class="btn btn-sm btn-outline-danger">Delete</button>
         </td>
     </tr>
 `).join('');
+};
+
+const loadStudents = async () => {
+    try {
+        const response = await fetch(API_URL);
+        const students = await response.json();
+        students.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+        displayStudents(students);
+    } catch (error) {
+        showError('Error loading students: ' + error.message);
+    }
 };
 
 const changeState = async (id, currentState) => {
@@ -162,10 +161,13 @@ const deleteStudent = async (id) => {
     }
 };
 
-const showError = (message) => {
-    errorDiv.style.display = 'block';
-    errorDiv.textContent = message;
-    setTimeout(() => {
-        errorDiv.style.display = 'none';
-    }, 3000);
-};
+// Make functions globally accessible
+window.changeState = changeState;
+window.editStudent = editStudent;
+window.deleteStudent = deleteStudent;
+window.resetForm = resetForm;
+
+// Load students when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    loadStudents();
+});
